@@ -41,7 +41,7 @@ yarn start:dev
 yarn start:prod
 ```
 
-## Test
+## Tests
 
 ```bash
 # unit tests
@@ -49,4 +49,18 @@ yarn test
 
 # e2e tests
 yarn test:e2e
+```
+
+## GraphQL
+
+The GraphQL playground is available at http://localhost:3000/graphql
+
+### Queries
+
+#### AppInfo
+
+```graphql
+query AppInfo {
+  appInfo
+}
 ```
