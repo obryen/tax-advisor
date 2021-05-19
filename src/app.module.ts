@@ -2,7 +2,7 @@ import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
-import { AppResolver } from './app.resolver';
+import { AppResolver } from '@src/app.resolver';
 
 @Module({
   imports: [
