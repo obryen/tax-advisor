@@ -1,73 +1,52 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# heyday tech challenge starter project
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+You can use this project as a starter for your tech challenge for heyday.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This starter project uses the [Nest](https://github.com/nestjs/nest) framework.
 
-## Description
+## Challenge description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Your task is to build a small GraphQL API.
+
+The business domain: every employee of a company has a certain budget to spend on vouchers from partners every month. If the spending of an employee in a certain month is higher than 44€, the employee has to “pay” 30% taxes from his or her net salary on the surplus amount which means that the tax advisor needs to account for it. (Background: in Germany, up to 44€ can be given tax free to an employee in forms of employee benefits ([Sachbezug](https://en.wikipedia.org/wiki/Employee_benefits)). There are other possible tax deductions in Germany as well, but they are not part of this challenge, but should be kept in mind when doing the code architecture)
+
+The API should be able to answer the following three requests (note: It’s not a deal breaker if you are not able to implement all three requests):
+
+- List all employees grouped by company that have more than 10€ in benefits left to spend this month. This query should be flexible in such a way that you can provide a past month as an argument as well.
+- A list of employees from a single company with their spending in a certain month. It should list the money per employee that was spent up to 44€ as tax free and the money above this threshold should be split up by net salary and taxes. There should also be a total per employee.
+- List the revenue per partner.
+
+Our challenge for you is to write the application based on NestJS and it should include the GraphQL Playground. You are free in your choice of other used packages.
+
+The example data can be found in the [`data`](data) folder.
+
+The deliverables are the code, a short description of what we need to do to run it as well as one example GraphQL query for each of the requests. When you are done, please send us the code via email (either zipped or as a link to a repository on Github/Gitlab/...). If you get stuck, have questions or do not find the time to complete the challenge, please do not hesitate to reach out.
 
 ## Installation
 
 ```bash
-$ npm install
+yarn
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+yarn start
 
 # watch mode
-$ npm run start:dev
+yarn start:dev
 
 # production mode
-$ npm run start:prod
+yarn start:prod
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+yarn test
 
 # e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+yarn test:e2e
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
