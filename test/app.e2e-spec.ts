@@ -1,24 +1,52 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
+import { getApolloServer } from '@nestjs/graphql';
+import { gql } from '@apollo/client';
+import {
+  createTestClient,
+  ApolloServerTestClient,
+} from 'apollo-server-testing';
+import { ApolloServerBase } from 'apollo-server-core';
+
 import { AppModule } from './../src/app.module';
 
-describe('AppController (e2e)', () => {
+describe('GraphQL', () => {
   let app: INestApplication;
+  let testingModule: TestingModule;
+  let apolloServer: ApolloServerBase;
+  let apolloClient: ApolloServerTestClient;
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
+  beforeAll(async () => {
+    testingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
+    app = testingModule.createNestApplication();
     await app.init();
+
+    apolloServer = getApolloServer(testingModule);
+    apolloClient = createTestClient(apolloServer);
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  afterAll(async () => {
+    await app.close();
+  });
+
+  describe('/graphql query.appInfo', () => {
+    const query = gql`
+      query AppInfo {
+        appInfo
+      }
+    `;
+
+    it('returns the app info', async () => {
+      const expectedResult = {
+        appInfo: 'heyday tech challenge starter',
+      };
+
+      const response = await apolloClient.query({ query });
+
+      expect(response.data).toEqual(expectedResult);
+    });
   });
 });

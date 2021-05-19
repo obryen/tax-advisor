@@ -6,7 +6,7 @@ export class AppResolver {
     nullable: false,
     description: 'App info.',
   })
-  async appInfo(): Promise<string> {
+  appInfo(): string {
     return 'heyday tech challenge starter';
   }
 }
