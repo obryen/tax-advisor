@@ -20,7 +20,7 @@ Our challenge for you is to write the application based on NestJS and it should 
 
 The example data can be found in the [`data`](data) folder.
 
-The deliverables are the code, a short description of what we need to do to run it as well as one example GraphQL query for each of the requests. When you are done, please send us the code via email (either zipped or as a link to a repository on Github/Gitlab/...). If you get stuck, have questions or do not find the time to complete the challenge, please do not hesitate to reach out.
+The deliverables are the code as well as one example GraphQL query for each of the requests. When you are done, please send us the code via email (either zipped or as a link to a repository on Github/Gitlab/...). If you get stuck, have questions or do not find the time to complete the challenge, please do not hesitate to reach out.
 
 ## Installation
 
@@ -31,20 +31,17 @@ yarn
 ## Running the app
 
 ```bash
-# development
+# Development
 yarn start
 
-# watch mode
+# Watch mode
 yarn start:dev
-
-# production mode
-yarn start:prod
 ```
 
 ## Tests
 
 ```bash
-# unit tests
+# Unit tests
 yarn test
 
 # e2e tests
