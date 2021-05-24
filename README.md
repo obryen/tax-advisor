@@ -50,7 +50,7 @@ The GraphQL playground is available at http://localhost:3000/graphql
 
 ### Queries
 
-#### AppInfo
+#### Sample Queries
 
 ```graphql
 
