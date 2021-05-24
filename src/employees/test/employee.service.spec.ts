@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { IBudgetInfo } from '../interface/budget-info-interface';
 import { EmployeeService } from '../services/employee.service';
 
 describe.only('EmployeeService', () => {
   let service: EmployeeService;
-
+  const remainingBudgetValue = 20;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [EmployeeService],
@@ -37,5 +38,41 @@ describe.only('EmployeeService', () => {
     expect(service.calculateNetSalaryAndTaxes(amountsToTax)).toEqual(
       expectedResult,
     );
+  });
+
+  it(`should return true  if the difference between expenditure and budget is above ${remainingBudgetValue}`, () => {
+    const mockBudget = 50;
+    const mockExpenditure = 80;
+
+    const expectedResponse: IBudgetInfo = {
+      difference: 30,
+      budgetIsAboveValue: true,
+    };
+
+    expect(
+      service.checkIfRemainingBudgetIsGreaterThanValue(
+        mockBudget,
+        mockExpenditure,
+        expectedResponse.difference,
+      ),
+    ).toEqual(expectedResponse);
+  });
+
+  it(`should return false  if the difference between expenditure and budget is below ${remainingBudgetValue}`, () => {
+    const mockBudget = 80;
+    const mockExpenditure = 50;
+
+    const expectedResponse: IBudgetInfo = {
+      difference: -30,
+      budgetIsAboveValue: true,
+    };
+
+    expect(
+      service.checkIfRemainingBudgetIsGreaterThanValue(
+        mockBudget,
+        mockExpenditure,
+        expectedResponse.difference,
+      ),
+    ).toEqual(expectedResponse);
   });
 });
