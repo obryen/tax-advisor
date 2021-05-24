@@ -50,7 +50,7 @@ export class EmployeeService {
           spendForGivenMonth.allItems,
         );
         // get difference in spending for each employee and
-        const condition = this.conditionCheck(employeeBudget, expenditure);
+        const condition = this.checkIfRemainingBudgetIsGreaterThan10(employeeBudget, expenditure);
         if (condition.pass) {
           const employeeWithMoreThan10Remaining: Employees = {
             budgetRemaining: condition.diff,
@@ -112,7 +112,7 @@ export class EmployeeService {
         spendForEmployee.untaxedItems,
       );
 
-      const totalSpend = unTaxedTotal + summary.totalGross;
+      const totalSpend = unTaxedTotal + summary.totalTaxed;
 
       const summerySpend: EmployeeSpendForCompanyModel = {
         employeeName: e.name,
@@ -164,8 +164,6 @@ export class EmployeeService {
     };
   }
 
-
-
   /**
    *Helper function start here
    */
@@ -179,18 +177,18 @@ export class EmployeeService {
   }
 
   calculateNetSalaryAndTaxes(itemsToTax: number[]) {
-    const taxedItems: number[] = [];
+    const taxableAmount: number[] = [];
     const netItems: number[] = [];
     const grossItems: number[] = [];
     itemsToTax.forEach((i) => {
-      const taxableAmount = i * this.TAX_AMOUNT;
-      const grossAmount = i + taxableAmount;
-      const netAmount = i - taxableAmount;
-      taxedItems.push(taxableAmount);
+      const taxable = i * this.TAX_AMOUNT;
+      const grossAmount = i;
+      const netAmount = i - taxable;
+      taxableAmount.push(taxable);
       netItems.push(netAmount);
       grossItems.push(grossAmount);
     });
-    const totalTaxed = this.calculateToTalInArray(taxedItems);
+    const totalTaxed = this.calculateToTalInArray(taxableAmount);
     const totalNet = this.calculateToTalInArray(netItems);
     const totalGross = this.calculateToTalInArray(grossItems);
     return {
@@ -201,7 +199,7 @@ export class EmployeeService {
   }
 
   // check if employee meets condition
-  private conditionCheck(employeeBudget: number, employeeExpenditure: number) {
+  private checkIfRemainingBudgetIsGreaterThan10(employeeBudget: number, employeeExpenditure: number) {
     const difference = employeeExpenditure - employeeBudget;
     if (difference >= 10) {
       return {
