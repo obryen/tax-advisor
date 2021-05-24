@@ -119,7 +119,7 @@ export class EmployeeService {
 
       const totalSpend = unTaxedTotal + summary.totalTaxed;
 
-      const summerySpend: EmployeeSpendForCompanyModel = {
+      const summarySpend: EmployeeSpendForCompanyModel = {
         employeeName: e.name,
         netSalary: summary.totalNet,
         taxFree: spendForEmployee.untaxedItems,
@@ -127,7 +127,7 @@ export class EmployeeService {
         totalSpent: totalSpend,
       };
 
-      employeeSpendForCompany.push(summerySpend);
+      employeeSpendForCompany.push(summarySpend);
     });
 
     return employeeSpendForCompany;
