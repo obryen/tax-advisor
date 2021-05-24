@@ -2,7 +2,40 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Employees {
+  id: Float
+  name: String
+  budget: Float
+  budgetRemaining: Float
+}
+
+type EmployeeListModel {
+  companyName: String!
+  employees: [Employees!]!
+}
+
+type EmployeeSpendForCompanyModel {
+  employeeName: String!
+  taxFree: [Float!]!
+  netSalary: Float!
+  taxes: Float!
+  totalSpent: Float!
+}
+
+type PatnerRevenueModel {
+  patnerName: String!
+  revenue: Float!
+}
+
 type Query {
   """App info."""
   appInfo: String!
+  employees_with_more_than_10(date: DateTime!): [EmployeeListModel!]
+  employee_spend_for_company(companyId: Float!, date: DateTime!): [EmployeeSpendForCompanyModel!]
+  revenue_per_partner: [PatnerRevenueModel!]
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime

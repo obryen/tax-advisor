@@ -6,6 +6,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "strictNullChecks": false,
     "target": "es2017",
     "sourceMap": true,
     "strict": true,

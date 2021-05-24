@@ -16,6 +16,7 @@
     "npm": "7.6.3"
   },
   "scripts": {
+    "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -35,6 +36,7 @@
     "@nestjs/graphql": "^7.10.6",
     "@nestjs/platform-express": "^7.6.15",
     "apollo-server-express": "^2.24.1",
+    "date-fns": "^2.21.3",
     "graphql": "^15.5.0",
     "graphql-tools": "^7.0.5",
     "react": "^17.0.2",
