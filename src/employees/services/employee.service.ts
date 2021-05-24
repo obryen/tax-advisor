@@ -18,6 +18,7 @@ import {
 import { ITaxInfo } from '../interface/tax-info-interface';
 import { IEmployeeSpend } from '../interface/employee-spend-interface';
 import { EmployeeSpendForCompanyModel } from '../models/employee-spend-for-company';
+import { IBudgetInfo } from '../interface/budget-info-interface';
 
 @Injectable()
 export class EmployeeService {
@@ -49,11 +50,15 @@ export class EmployeeService {
         const expenditure = this.calculateToTalInArray(
           spendForGivenMonth.allItems,
         );
-        // get difference in spending for each employee and
-        const condition = this.checkIfRemainingBudgetIsGreaterThan10(employeeBudget, expenditure);
-        if (condition.pass) {
+        // get difference in spending for each employee and check if its greater than 10
+        const condition = this.checkIfRemainingBudgetIsGreaterThanValue(
+          employeeBudget,
+          expenditure,
+          10,
+        );
+        if (condition.budgetIsAboveValue) {
           const employeeWithMoreThan10Remaining: Employees = {
-            budgetRemaining: condition.diff,
+            budgetRemaining: condition.difference,
             name: e.name,
             budget: e.budget,
             id: e.id,
@@ -199,17 +204,21 @@ export class EmployeeService {
   }
 
   // check if employee meets condition
-  private checkIfRemainingBudgetIsGreaterThan10(employeeBudget: number, employeeExpenditure: number) {
+  checkIfRemainingBudgetIsGreaterThanValue(
+    employeeBudget: number,
+    employeeExpenditure: number,
+    valueToCompare: number,
+  ): IBudgetInfo {
     const difference = employeeExpenditure - employeeBudget;
-    if (difference >= 10) {
+    if (difference >= valueToCompare) {
       return {
-        pass: true,
-        diff: difference,
+        budgetIsAboveValue: true,
+        difference: difference,
       };
     }
     return {
-      pass: false,
-      diff: difference,
+      budgetIsAboveValue: false,
+      difference: difference,
     };
   }
 }
