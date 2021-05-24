@@ -25,27 +25,23 @@ The deliverables are the code as well as one example GraphQL query for each of t
 ## Installation
 
 ```bash
-yarn
+npm i
 ```
 
 ## Running the app
 
 ```bash
 # Development
-yarn start
+npm start
 
-# Watch mode
-yarn start:dev
 ```
 
 ## Tests
 
 ```bash
 # Unit tests
-yarn test
+npm run test
 
-# e2e tests
-yarn test:e2e
 ```
 
 ## GraphQL
@@ -57,7 +53,43 @@ The GraphQL playground is available at http://localhost:3000/graphql
 #### AppInfo
 
 ```graphql
-query AppInfo {
-  appInfo
+
+--- List all employees grouped by company that have more than 10€ in benefits left to spend this month. This query should be flexible in such a way that you can provide a past month as an argument as well.
+----
+query{
+  employees_with_more_than_10(date:"2020-02-01"){
+    companyName
+    employees{
+      id
+      name
+      budgetRemaining
+    }
+  }
 }
+
+--- A list of employees from a single company with their spending in a certain month. It should list the money per employee that was spent up to 44€ as tax free and the money above this threshold should be split up by net salary and taxes. There should also be a total per employee.
+----
+
+query{
+  employee_spend_for_company(date:"2020-02-01",companyId:2){
+   employeeName
+    taxFree
+    netSalary
+    taxes
+    totalSpent
+  }
+}
+
+
+---- Revenue per patner ----
+
+List the revenue per partner.
+
+query{
+  revenue_per_partner{
+    patnerName
+    revenue
+  }
+}
+
 ```
